@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+   <!-- Основной стиль для BottomNavigationView -->
+   <style name="BottomNavigationViewStyle" parent="Widget.MaterialComponents.BottomNavigationView">
+      <!-- Нормальный цвет иконки и текста -->
+      <item name="itemIconTint">@color/blackGreen</item>
+      <item name="itemTextColor">@color/white</item>
+      <!-- Фон меню -->
+      <item name="backgroundTint">@color/white</item>
+   </style>
+</resources>
