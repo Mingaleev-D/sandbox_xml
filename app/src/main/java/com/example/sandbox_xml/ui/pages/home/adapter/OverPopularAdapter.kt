@@ -11,6 +11,8 @@ import com.example.sandbox_xml.databinding.OverRowBinding
 
 class OverPopularAdapter() : RecyclerView.Adapter<OverPopularAdapter.OverViewHolder>() {
 
+    lateinit var onOverItemClick: (RemotePopularMeal.RemoteOverMeal) -> Unit
+
     inner class OverViewHolder(val binding: OverRowBinding) : RecyclerView.ViewHolder(binding.root)
 
     private val diffUtil =
@@ -55,5 +57,10 @@ class OverPopularAdapter() : RecyclerView.Adapter<OverPopularAdapter.OverViewHol
     ) {
         val data = differ.currentList[position]
         Glide.with(holder.itemView).load(data.strMealThumb).into(holder.binding.overImg)
+
+        holder.itemView.setOnClickListener {
+            onOverItemClick.invoke(data)
+        }
+
     }
 }

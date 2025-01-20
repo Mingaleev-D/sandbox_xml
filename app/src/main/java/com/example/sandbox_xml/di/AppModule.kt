@@ -2,6 +2,7 @@ package com.example.sandbox_xml.di
 
 import android.content.Context
 import androidx.room.Room
+import com.example.sandbox_xml.data.local.MealDatabase
 import com.example.sandbox_xml.data.remote.ApiService
 import com.example.sandbox_xml.data.repository.MealRepository
 import com.example.sandbox_xml.data.repository.MealRepositoryImpl
@@ -78,22 +79,25 @@ object AppModule {
     @Singleton
     fun provideRepository(
            apiService: ApiService,
+           mealDatabase: MealDatabase
     ): MealRepository {
         return MealRepositoryImpl(
                apiService = apiService,
+               mealDatabase = mealDatabase
         )
     }
-    //    @Provides
-    //    @Singleton
-    //    fun provideImageVistaDatabase(
-    //           @ApplicationContext context: Context
-    //    ): ImageVistaDatabase {
-    //        return Room
-    //            .databaseBuilder(
-    //                   context,
-    //                   ImageVistaDatabase::class.java,
-    //                   IMAGE_VISTA_DATABASE
-    //            )
-    //            .build()
-    //    }
+
+    @Provides
+    @Singleton
+    fun provideMealDatabase(
+           @ApplicationContext context: Context
+    ): MealDatabase {
+        return Room
+            .databaseBuilder(
+                   context,
+                   MealDatabase::class.java,
+                   "meal_db"
+            )
+            .build()
+    }
 }

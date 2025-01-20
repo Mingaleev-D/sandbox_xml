@@ -1,5 +1,6 @@
 package com.example.sandbox_xml.ui.pages.home
 
+import android.content.Intent
 import androidx.fragment.app.viewModels
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.sandbox_xml.R
 import com.example.sandbox_xml.databinding.FragmentHomeBinding
+import com.example.sandbox_xml.ui.pages.details.MealDetailsActivity
 import com.example.sandbox_xml.ui.pages.home.adapter.CategoryAdapter
 import com.example.sandbox_xml.ui.pages.home.adapter.OverPopularAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -43,8 +45,10 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initRandImgView()
+
         initGetPopularOver()
         setupOverPopularRV()
+
         setupCategoriesRV()
         getAllCategories()
     }
@@ -87,6 +91,12 @@ class HomeFragment : Fragment() {
         viewModel.getRandomMealLiveData.observe(viewLifecycleOwner) { meal ->
             meal?.let {
                 Glide.with(this).load(meal.meals!![0]!!.strMealThumb).into(binding.cardImg)
+
+                binding.cardImg.setOnClickListener {
+                    val intent = Intent(context, MealDetailsActivity::class.java)
+                    intent.putExtra("id", meal.meals[0]?.idMeal)
+                    startActivity(intent)
+                }
             }
         }
     }
