@@ -48,10 +48,13 @@ class HomeFragment : Fragment() {
 
         initGetPopularOver()
         setupOverPopularRV()
+        onOverItemClick()
 
         setupCategoriesRV()
         getAllCategories()
     }
+
+
 
     private fun setupCategoriesRV() {
         categoryAdapter = CategoryAdapter()
@@ -76,6 +79,13 @@ class HomeFragment : Fragment() {
         binding.popularItemRv.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             adapter = overAdapter
+        }
+    }
+    private fun onOverItemClick() {
+        overAdapter.onOverItemClick = {
+            val intent = Intent(context, MealDetailsActivity::class.java)
+            intent.putExtra("id", it.idMeal)
+            startActivity(intent)
         }
     }
 
