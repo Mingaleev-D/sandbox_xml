@@ -19,5 +19,14 @@
       android:id="@+id/searchFragment"
       android:name="com.example.sandbox_xml.ui.pages.search.SearchFragment"
       android:label="fragment_search"
-      tools:layout="@layout/fragment_search" />
+      tools:layout="@layout/fragment_search" >
+      <action
+         android:id="@+id/action_searchFragment_to_searchResultFragment"
+         app:destination="@id/searchResultFragment" />
+   </fragment>
+   <fragment
+      android:id="@+id/searchResultFragment"
+      android:name="com.example.sandbox_xml.ui.pages.search.result.SearchResultFragment"
+      android:label="fragment_search_result"
+      tools:layout="@layout/fragment_search_result" />
 </navigation>
