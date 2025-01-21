@@ -34,7 +34,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.products.observe(viewLifecycleOwner) {
-            binding.test.text = if (it is Resource.Success) it.data[0].title.toString() else it.toString()
+          //  binding.test.text = if (it is Resource.Success) it.data[0].title.toString() else it.toString()
         }
     }
 

@@ -4,9 +4,12 @@ import android.content.Context
 import androidx.room.Room
 import com.example.sandbox_xml.data.local.ProductsDao
 import com.example.sandbox_xml.data.local.ProductsDatabase
+import com.example.sandbox_xml.data.local.RecentSearchDao
 import com.example.sandbox_xml.data.remote.ApiService
 import com.example.sandbox_xml.data.repository.ProductRepositoryImpl
+import com.example.sandbox_xml.data.repository.RecentSearchRepositoryImpl
 import com.example.sandbox_xml.domain.repository.ProductRepository
+import com.example.sandbox_xml.domain.repository.RecentSearchRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -87,6 +90,16 @@ object AppModule {
 
     @Provides
     @Singleton
+    fun provideRecentSearchRepository(
+           recentSearchDao: RecentSearchDao
+    ): RecentSearchRepository {
+        return RecentSearchRepositoryImpl(
+               recentSearchDao = recentSearchDao
+        )
+    }
+
+    @Provides
+    @Singleton
     fun provideProductsDatabase(
            @ApplicationContext context: Context
     ): ProductsDatabase {
@@ -102,4 +115,8 @@ object AppModule {
     @Provides
     @Singleton
     fun provideProductsDao(db: ProductsDatabase) = db.productsDao()
+
+    @Provides
+    @Singleton
+    fun provideRecentSearchDao(db: ProductsDatabase) = db.recentSearchDao()
 }
